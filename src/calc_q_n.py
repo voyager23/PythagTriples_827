@@ -13,10 +13,16 @@ import itertools as it
 from sympy import ntheory
 
 def triples_legs(n):
-	return ntheory.factorint(n)
+	# list divisor pairs for n
+	# find expanded prime factorisation
+	# list all combinations from 1 to nfactors
+	# apply set to remove repeats
+	# count pairs with equal parity
+	
+	return (-1)
 	
 def triples_hypot(n):
-	return ntheory.factorint(n)
+	return (-2)
 
 def Qn(n):
 	# Define Q(n) to be the smallest number which occurs in exactly n Pythagorean Triples
