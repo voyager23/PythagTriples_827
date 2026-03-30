@@ -13,4 +13,6 @@ hypotenuse solutions
 (75, 2812, 2813) => (1,5625)
 
 Total 9 solutions
+=======
+
 Database Dictionary Complete
