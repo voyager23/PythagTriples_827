@@ -58,8 +58,14 @@ def main(args):
 				database[v] = 1
 			else:
 				database[v] += 1
+
+			if v == 75:
+				print(k)
 				
 	print("Database Dictionary Complete")
+
+	# DEBUG EXIT
+	exit(0)
 	
 	"""
 		# Database content
