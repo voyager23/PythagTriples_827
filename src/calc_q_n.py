@@ -61,7 +61,6 @@ def ptt_price(Z):
 	ptt3 = np.reshape(np.dot(C,Z),3)
 	return [ptt1, ptt2, ptt3]
 	
-	
 def main(args):
 	Y = np.asarray([3,4,5])
 	ptt = ptt_berggren(Y)

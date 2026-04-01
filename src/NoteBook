@@ -1,0 +1,27 @@
+def main(args):
+	Y = np.asarray([3,4,5])
+	ptt = ptt_berggren(Y)
+	print("Base triple ",Y)
+	
+	for pt in ptt:
+		print()
+		print(f"From Berggren {pt}")
+		pt_price = ptt_price(pt)
+		print("From Price:", end='')
+		for ptp in pt_price:
+			print(ptp, end=' ')
+		print()
+		
+	return 0
+
+	
+def build_nlevel_tree(levels, transform='P'):
+	tree = [ np.asarray([3,4,5]) ]	# Initial tree with base triple
+	level = 0
+	while(level < levels):
+		src = tree[-1]
+		dst =list()
+		for pt in src:
+			
+	return 0
+	
