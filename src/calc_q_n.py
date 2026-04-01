@@ -38,41 +38,67 @@ def Qn(n):
 	return total
 	
 def ptt_berggren(Z):
-	# Z is a column vector [[a],[b],[c]]
 	# Define 3 transformation matrix
-	#Z = np.array([[a],[b],[c]])
 	A = np.array([[-1,2,2],[-2,1,2],[-2,2,3]])
 	B = np.array([[1,2,2],[2,1,2],[2,2,3]])
 	C = np.array([[1,-2,2],[2,-1,2],[2,-2,3]])
-	ptt1 = np.reshape(np.dot(A,Z),3)
-	ptt2 = np.reshape(np.dot(B,Z),3)
-	ptt3 = np.reshape(np.dot(C,Z),3)
+	ptt1 = (np.dot(A,Z))
+	ptt2 = (np.dot(B,Z))
+	ptt3 = (np.dot(C,Z))
 	return [ptt1, ptt2, ptt3]
 	
+def ptt_linear_berggren(Z):
+	# Z is a 3-list of integers
+	a = Z[0]
+	b = Z[1]
+	c = Z[2]	# convenience variables
+	return [[-a + 2*b + 2*c, -2*a + b + 2*c, -2*a + 2*b + 3*c],
+			[a + 2*b + 2*c, 2*a + b + 2*c, 2*a + 2*b + 3*c],
+			[a - 2*b + 2*c, 2*a -b + 2*c, 2*a -2*b + 3*c ]]
+
+	
 def ptt_price(Z):
-	# Z is a column vector [[a],[b],[c]]
 	# Define 3 transformation matrix
-	#Z = np.array([[a],[b],[c]])
 	A = np.array([[2,1,-1],[-2,2,2],[-2,1,3]])
 	B = np.array([[2,1,1],[2,-2,2],[2,-1,3]])
 	C = np.array([[2,-1,1],[2,2,2],[2,1,3]])
-	ptt1 = np.reshape(np.dot(A,Z),3)
-	ptt2 = np.reshape(np.dot(B,Z),3)
-	ptt3 = np.reshape(np.dot(C,Z),3)
+	ptt1 = (np.dot(A,Z))
+	ptt2 = (np.dot(B,Z))
+	ptt3 = (np.dot(C,Z))
 	return [ptt1, ptt2, ptt3]
 	
-def main(args):
-	Y = np.asarray([3,4,5])
-	ptt = ptt_berggren(Y)
-	print("Base triple ",Y)
+def ptt_linear_price(Z):
+	# Z is a 3-list of integers
+	a = Z[0]
+	b = Z[1]
+	c = Z[2]	# convenience variables
+	return [[2*a + b - c , -2*a + 2*b + 2*c, -2*a + b + 3*c],
+			[2*a + b + c , +2*a - 2*b + 2*c, +2*a - b + 3*c],
+			[2*a - b + c , +2*a + 2*b + 2*c, +2*a + b + 3*c]]
 	
-	for pt in ptt:
-		print()
-		print(f"From Berggren {pt}")
-		pt_price = ptt_price(pt)
-		print("From Price:", end='')
-		for ptp in pt_price:
-			print(ptp, end=' ')
+def build_nlevel_tree(levels, transform = 'P'):
+	tree = [[[3,4,5]]]	# Initial tree with base triple
+	level = 0
+	while(level < levels):
+		src = tree[-1]
+		dst = []
+		for pt in src:
+			if transform == 'P':
+				# extend adds an 'object'
+				dst.extend(ptt_linear_price(pt)) 	# add 3 lists to the tree using Price transform
+			else:
+				dst.extend(ptt_linear_berggren(pt))	# Berggren transform
+		tree.append(dst)	# adds individual lists to tree
+		level += 1			
+	return tree
+	
+def main(args):
+	tree = build_nlevel_tree(3,'P')
+	
+	for z in tree:
+		print()	# z is list of arrays
+		for a in z:
+			print(a)	# a is an array of 3 int
 		print()
 		
 	return 0
