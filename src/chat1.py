@@ -1,6 +1,6 @@
 def factor_pairs(n):
     # Prime factorisation for 2304 = 2^8 * 3^2
-    factors = [(2, 8), (3, 2)]
+    factors = [(3, 2), (5, 4)]
     
     limit = int(n**0.5)
     divisors = []
@@ -24,8 +24,9 @@ def factor_pairs(n):
     pairs = [(d, n // d) for d in divisors]
     return pairs
 
+# ========================
 
-pairs = factor_pairs(2304)
+pairs = factor_pairs(5625)
 
 for p in pairs:
     print(p)
