@@ -9,34 +9,9 @@
 import sys
 import math
 import itertools as it
-from sympy import ntheory
+from sympy.ntheory import factorint
 import numpy as np
 
-
-def triples_legs(n):
-	# list divisor pairs for n
-	# find expanded prime factorisation
-	# list all combinations from 1 to nfactors
-	# apply set to remove repeats
-	# count pairs with equal parity
-	
-	return (-1)
-	
-def triples_hypot(n):
-	return (-2)
-
-def Qn(n):
-	# Define Q(n) to be the smallest number which occurs in exactly n Pythagorean Triples
-	# Examples Q(5) = 15, Q(10) = 48 and Q(10^3) = 8064000
-	# Given a number e.g. a = 75
-	# find the number of triples when 75 is a 'leg'
-	nlegs = triples_legs(n)
-	nhyps = triples_hypot(n+5)
-	#total = nlegs + nhyps
-	total = -1
-	print(f"nlegs = {nlegs} nhypn = {nhyps} total = {total}")
-	return total
-	
 def ptt_berggren(Z):
 	# Define 3 transformation matrix
 	A = np.array([[-1,2,2],[-2,1,2],[-2,2,3]])
@@ -92,14 +67,26 @@ def build_nlevel_tree(levels, transform = 'P'):
 		level += 1			
 	return tree
 	
-def main(args):
-	tree = build_nlevel_tree(3,'P')
+
+def Qn(n):
+	# Define Q(n) to be the smallest number which occurs in exactly n Pythagorean Triples
+	# Examples Q(5) = 15, Q(10) = 48 and Q(10^3) = 8064000
+	# Given a number e.g. a = 48
 	
-	for z in tree:
-		print()	# z is list of arrays
-		for a in z:
-			print(a)	# a is an array of 3 int
-		print()
+	# find the number of triples when 48 is a leg
+	nlegs = 0
+	
+	# find the number of triples when 48 is a 'hypotenuse'
+	nhyps = 0
+	
+	# calc total and return total
+	total = nlegs + nhyps
+	print(f"nlegs = {nlegs} nhypn = {nhyps} total = {total}")
+	return total
+	
+	
+def main(args):
+
 		
 	return 0
 
