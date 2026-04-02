@@ -6,12 +6,12 @@
 #  
 #  
 
-
 import sys
 import math
 import itertools as it
 from sympy import ntheory
 import numpy as np
+
 
 def triples_legs(n):
 	# list divisor pairs for n

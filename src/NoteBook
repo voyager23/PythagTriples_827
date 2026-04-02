@@ -24,4 +24,14 @@ def build_nlevel_tree(levels, transform='P'):
 		for pt in src:
 			
 	return 0
+
+def main(args):
+	tree = build_nlevel_tree(3,'P')
 	
+	for z in tree:
+		print()	# z is list of arrays
+		for a in z:
+			print(a)	# a is an array of 3 int
+		print()
+		
+	return 0
