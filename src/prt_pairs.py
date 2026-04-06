@@ -31,17 +31,59 @@ def check_pair(t):
 	return t[0]%2 == t[1]%2 and t[0] != t[1]
 	
 def main(args):
-	query = 48
-	
-	pair_count = 0
-	pairs = factor_pairs(query)
-	for p in pairs:
-		if(check_pair(p)):
-			print(p)
-			pair_count += 1
-	print(f"Query: {query} -> testing {query*query}")
-	print(f"Found {pair_count} pairs.")
-	return 0
+	while(True):
+		
+		query = input("Enter a query or return to quit: ")
+		if(query == ""):
+			return 0
+		else:
+			query = int(query)
+		if(query < 1):
+			return 0
+			
+		pair_count = 0
+		pairs = factor_pairs(query)	# pairs is a list of 2-tuples
+		for p in pairs:
+			#if(check_pair(p)):
+			if(True):
+				print(p)
+				pair_count += 1
+		print(f"Query: {query} -> testing {query*query}")
+		print(f"Found {pair_count} pairs.")
+		# analyse pairs into 3 groups, odd, even and mixed parity
+		even = list()
+		odd = list()
+		mixed = list()
+		for p in pairs:
+			if (p[0]%2 != p[1]%2):
+				mixed.append(p)
+			else:
+				if(p[0]%2 == 0):
+					even.append(p)
+				else:
+					odd.append(p)
+					
+		print("Even Parity")
+		for q in even:
+			a = factorint(q[0])
+			b = factorint(q[1])
+			print(f"{q} {a}\t{b}")
+		print()
+		
+		print("Odd Parity")
+		for q in odd:
+			a = factorint(q[0])
+			b = factorint(q[1])
+			print(f"{q} {a}\t{b}")
+		print()
+		
+		print("Mixed Parity")
+		for q in mixed:
+			a = factorint(q[0])
+			b = factorint(q[1])
+			print(f"{q} {a}\t{b}")
+		print()
+		print("-----------------------------------")
 
 
 if __name__ == '__main__':
