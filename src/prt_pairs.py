@@ -30,6 +30,19 @@ def check_pair(t):
 	# return True if both elements are of equal odd/even parity
 	return t[0]%2 == t[1]%2 and t[0] != t[1]
 	
+def count_divisor_pairs(n):
+	# factorint returns a dictionary containing 
+	# the prime factors of n as keys and their respective multiplicities as values.
+	# e.g. {2: 4, 3: 2}
+	primes = factorint(n)
+	pairs = 1
+	for p,e in primes.items():
+		if(p == 2):
+			pairs *= (e+1) #?
+		else:
+			pairs *= (e+1)
+	return pairs			
+	
 def main(args):
 	while(True):
 		
@@ -84,6 +97,7 @@ def main(args):
 			print(f"{q} {a}\t{b}")
 		print()
 		print("-----------------------------------")
+		print(f"count_divisor_pairs({query}) = {count_divisor_pairs(query)}")
 
 
 if __name__ == '__main__':
