@@ -45,6 +45,7 @@ def pairs_196():
 	return 0
 
 def pairs_1764():
+	# From 2*3*7 = 42
 	# Consider 2*2 * 3*3 * 7*7 = 1764
 	numerator = 2*2*3*3*7*7 
 	print(numerator)
@@ -64,6 +65,7 @@ def pairs_1764():
 	return 0
 	
 def main(args):
+	
 	product,primes = max_distinct_prime_product(1000000000)
 	print(product, primes)
 
