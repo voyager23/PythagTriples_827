@@ -29,9 +29,35 @@ class BaseN:
 		self.n = m % self.base
 		while(self.n < 0):
 			self.n += self.base
+# ----- End Class BaseN -----
+
+class BaseNcounters:
+	
+	def __init__(self, base_list):
+		for b in base_list:
+			self.base_list.append(BaseN(b))
+		self.working = len(self.base_list) - 1
+		
+	def inc_counters(self, m=1):
+		#counters -> base_list
+		z = counters[working].inc()
+		if(z == 0):	# need to retreat and increment previous counter
+			while(True):
+				working -= 1
+				if(working < 0):
+					return 0
+				y = counters[working].inc()
+				if(y != 0):	# Success
+					working = len(counters) - 1
+					break
+				else:	# Increment failed
+					continue
+		else:
+			continue
+		
 			
 def main(args):
-	counters = [BaseN(2), BaseN(4), BaseN(6)]
+	counters = [BaseN(3), BaseN(4), BaseN(5), BaseN(6)]
 	working = len(counters) - 1
 	
 	while(True):
