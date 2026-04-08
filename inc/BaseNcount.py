@@ -22,8 +22,11 @@ class BaseN:
 		while(self.n < 0):
 			self.n += self.base
 			
-	def get(self):
+	def get_n(self):
 		return self.n
+		
+	def get_base(self):
+		return self.base
 		
 	def set(self,m):
 		self.n = m % self.base
@@ -34,51 +37,52 @@ class BaseN:
 class BaseNcounters:
 	
 	def __init__(self, base_list):
+		self.base_list = list()
 		for b in base_list:
 			self.base_list.append(BaseN(b))
 		self.working = len(self.base_list) - 1
 		
 	def inc_counters(self, m=1):
-		#counters -> base_list
-		z = counters[working].inc()
+		z = self.base_list[self.working].inc()
 		if(z == 0):	# need to retreat and increment previous counter
 			while(True):
-				working -= 1
-				if(working < 0):
+				self.working -= 1
+				if(self.working < 0):
 					return 0
-				y = counters[working].inc()
+				y = self.base_list[self.working].inc()
 				if(y != 0):	# Success
-					working = len(counters) - 1
+					self.working = len(self.base_list) - 1
 					break
 				else:	# Increment failed
 					continue
-		else:
-			continue
+		return self.base_list
+	
+	def get(self):
+		return self.base_list
+		
+	def all_zero(self):
+		for c in self.base_list:
+			if(c.get_n() != 0):
+				return False
+		return True
+		
+# -----End Class BaseNcounters-----
 		
 			
 def main(args):
-	counters = [BaseN(3), BaseN(4), BaseN(5), BaseN(6)]
-	working = len(counters) - 1
+	bnc = BaseNcounters([2,3,5])
+	for c in bnc.get():
+		print(f"{c.get_n()}/{c.get_base()}",end=" ")
+	print()
 	
 	while(True):
-		for bn in counters:
-			print(bn.get(),end=" ")
+		bnc.inc_counters()
+		for c in bnc.get():
+			print(c.get_n(),end=" ")
 		print()
-		z = counters[working].inc()
-		if(z == 0):	# need to retreat and increment previous counter
-			while(True):
-				working -= 1
-				if(working < 0):
-					return 0
-				y = counters[working].inc()
-				if(y != 0):	# Success
-					working = len(counters) - 1
-					break
-				else:	# Increment failed
-					continue
-		else:
-			continue
-			
+		if (bnc.all_zero() == True):
+			break
+						
 	return 0
 
 
