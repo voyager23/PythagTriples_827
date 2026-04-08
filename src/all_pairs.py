@@ -9,6 +9,7 @@
 import sys
 from sympy.ntheory import factorint
 from prime_utils import max_distinct_prime_product
+import BaseNcount
 
 def pairs_225():
 	# Consider 3^2 * 5^2 = 225
@@ -65,7 +66,7 @@ def pairs_1764():
 def main(args):
 	product,primes = max_distinct_prime_product(1000000000)
 	print(product, primes)
-	exit(0)
+
 	pairs_225()
 	pairs_196()
 	return 0
