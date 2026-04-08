@@ -1,5 +1,6 @@
 import sys
 from sympy.ntheory import factorint
+from prime_utils import max_distinct_prime_product
 
 def factor_pairs(n):
     # Prime factorisation for 2304 = 2^8 * 3^2
@@ -41,7 +42,8 @@ def count_divisor_pairs(n):
 			pairs *= (e+1) #?
 		else:
 			pairs *= (e+1)
-	return pairs			
+	return pairs
+			
 	
 def main(args):
 	while(True):
