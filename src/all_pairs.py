@@ -9,7 +9,7 @@
 import sys
 from sympy.ntheory import factorint
 from prime_utils import max_distinct_prime_product
-import BaseNcount
+import BaseNcount as bncnt
 
 def pairs_225():
 	# Consider 3^2 * 5^2 = 225
@@ -50,27 +50,47 @@ def pairs_1764():
 	numerator = 2*2*3*3*7*7 
 	print(numerator)
 	count = 0
-	for e2 in range(5):
-		for e7 in range(5):
-			
-			divisor = 2**(e2) * 7**(e7)
-			dividend = 2**(4-e2) * 7**(4-e7)
-			if(divisor%2 != dividend%2):
-				print("\t",end="")
-			print(divisor,dividend, end = " ")
-			print(factorint(divisor), end = " ")
-			print(factorint(dividend))
-			count += 1
-	print(f"{count} pairs found\n")
+	primes = factorint(numerator)	# e.g. {2: 2, 3: 2, 7: 2}
+	#print(primes)
+	# extract a list of exponents from primes
+	# initialise BaseNcounter using list
+	exps = list()
+	for k,v in primes.items():
+		exps.append(v)
+	bnc = bncnt.BaseNcounters(exps)
+	
+	# Using the primes found in primes and the prime exponents from bnc.get_indices
+	# 	form a cascade of loops
+	# primes {2: 2, 3: 2, 7: 2}
+	# bnc.get_indices() -> [0, 0, 0]
+	
+	# divisor  = 2**(e2) * 7**(e7)
+	# dividend = 2**(4-e2) * 7**(4-e7)
+	
+	divisor = 1
+	dividend = 1
+	indexes = bnc.get_indices()	# -> [0,0,0]
+	for p,b in primes.items(): #p = prime b = base/exponent
+		foo = indexes.pop(0)
+		divisor  *= p**foo
+		dividend *= p**(b - foo)
+		print(divisor,dividend, end = " ")
+	
+	
+
+	print(f"{count} primes found\n")
 	return 0
 	
 def main(args):
 	
-	product,primes = max_distinct_prime_product(1000000000)
-	print(product, primes)
+	# ~ product,primes = max_distinct_prime_product(1000000000)
+	# ~ print(product, primes)
 
-	pairs_225()
-	pairs_196()
+	#pairs_225()
+	#pairs_196()
+	
+	pairs_1764()
+	
 	return 0
 
 
