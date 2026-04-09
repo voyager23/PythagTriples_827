@@ -44,13 +44,15 @@ def pairs_196():
 	print(f"{count} pairs found\n")
 	return 0
 
-def pairs_1764():
-	# From 2*3*7 = 42
-	# Consider 2*2 * 3*3 * 7*7 = 1764
-	numerator = 2*2*3*3*7*7 
+def pairs_196_new():
+	# Consider 2^2 * 7^2 = 196
+	numerator = 2*2*7*7 
 	print(numerator)
 	count = 0
-	primes = factorint(numerator)	# e.g. {2: 2, 3: 2, 7: 2}
+	
+	breakpoint()
+	
+	primes = factorint(numerator)	# e.g. {2: 2, 7: 2}
 	#print(primes)
 	# extract a list of exponents from primes
 	# initialise BaseNcounter using list
@@ -74,7 +76,7 @@ def pairs_1764():
 		foo = indexes.pop(0)
 		divisor  *= p**foo
 		dividend *= p**(b - foo)
-		print(divisor,dividend, end = " ")
+		print(divisor,dividend, end = " / ")
 	
 	
 
@@ -87,9 +89,9 @@ def main(args):
 	# ~ print(product, primes)
 
 	#pairs_225()
-	#pairs_196()
+	pairs_196()
 	
-	pairs_1764()
+	pairs_196_new()
 	
 	return 0
 
