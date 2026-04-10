@@ -43,56 +43,52 @@ def pairs_196():
 			count += 1
 	print(f"{count} pairs found\n")
 	return 0
-
-def pairs_196_new():
-	# Consider 2^2 * 7^2 = 196
-	numerator = 2*2*7*7 
-	print(numerator)
+	
+def a_42():
+	"""
+	let a = 42 then a^2 = 1764
+	a = 2*3*7  then 1764 = 2^2 * 3*2 * 7^2
+	exponent range is 0 <= e < 3
+	"""
+	# Test output only
+	bnc = bncnt.BaseNcounters([2,2,2])
+	for c in bnc.get_base_list():
+		print(f"n:{c.get_n()}/base{c.get_base()}",end=" ")
+	print()
+	# End test output
+	
 	count = 0
-	
-	breakpoint()
-	
-	primes = factorint(numerator)	# e.g. {2: 2, 7: 2}
-	#print(primes)
-	# extract a list of exponents from primes
-	# initialise BaseNcounter using list
-	exps = list()
-	for k,v in primes.items():
-		exps.append(v)
-	bnc = bncnt.BaseNcounters(exps)
-	
-	# Using the primes found in primes and the prime exponents from bnc.get_indices
-	# 	form a cascade of loops
-	# primes {2: 2, 3: 2, 7: 2}
-	# bnc.get_indices() -> [0, 0, 0]
-	
-	# divisor  = 2**(e2) * 7**(e7)
-	# dividend = 2**(4-e2) * 7**(4-e7)
-	
-	divisor = 1
-	dividend = 1
-	indexes = bnc.get_indices()	# -> [0,0,0]
-	for p,b in primes.items(): #p = prime b = base/exponent
-		foo = indexes.pop(0)
-		divisor  *= p**foo
-		dividend *= p**(b - foo)
-		print(divisor,dividend, end = " / ")
-	
-	
+	pivot = False
+	for e2 in range(3):
+		if(pivot==True):
+			break
+		for e3 in range(3):
+			if(pivot==True):
+				break
+			for e7 in range(3):
+				divisor = 2**(e2) * 3**(e3) * 7**(e7)
+				dividend = 2**(2-e2) * 3**(2-e3) * 7**(2-e7)
+				if(divisor%2 != dividend%2):
+					print("\t",end="")
+				else:
+					count += 1
+				print(divisor,dividend, end = " ")
+				print(factorint(divisor), end = " ")
+				print(factorint(dividend))
+				# Breakout logic here
+				if(divisor==dividend):
+					pivot = True
+					count -= 1
+					break
+	return count
 
-	print(f"{count} primes found\n")
-	return 0
 	
 def main(args):
-	
 	# ~ product,primes = max_distinct_prime_product(1000000000)
 	# ~ print(product, primes)
-
+	print(a_42(),"useable equal-parity pairs")
 	#pairs_225()
-	pairs_196()
-	
-	pairs_196_new()
-	
+	#pairs_196()
 	return 0
 
 

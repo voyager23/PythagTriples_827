@@ -1,4 +1,41 @@
-def main(args):
+
+def pairs_196_new():
+	# Consider 2^2 * 7^2 = 196
+	numerator = 2*2*7*7 
+	print(numerator)
+	count = 0
+	
+	breakpoint()
+	
+	primes = factorint(numerator)	# e.g. {2: 2, 7: 2}
+	#print(primes)
+	# extract a list of exponents from primes
+	# initialise BaseNcounter using list
+	exps = list()
+	for k,v in primes.items():
+		exps.append(v)
+	bnc = bncnt.BaseNcounters(exps)
+	
+	# Using the primes found in primes and the prime exponents from bnc.get_indices
+	# 	form a cascade of loops
+	# primes {2: 2, 3: 2, 7: 2}
+	# bnc.get_indices() -> [0, 0, 0]
+	
+	# divisor  = 2**(e2) * 7**(e7)
+	# dividend = 2**(4-e2) * 7**(4-e7)
+	
+	divisor = 1
+	dividend = 1
+	indexes = bnc.get_indices()	# -> [0,0,0]
+	for p,b in primes.items(): #p = prime b = base/exponent
+		foo = indexes.pop(0)
+		divisor  *= p**foo
+		dividend *= p**(b - foo)
+		print(divisor,dividend, end = " / ")
+	print(f"{count} primes found\n")
+	return 0
+	
+	def main(args):
 	Y = np.asarray([3,4,5])
 	ptt = ptt_berggren(Y)
 	print("Base triple ",Y)
