@@ -67,6 +67,14 @@ class BaseNcounters:
 			idx.append(c.get_n())
 		return idx
 		
+	def get_idx_complement(self):
+		# return a list of current index value 
+		# and complement for each counter
+		idxcomp = list()
+		for c in self.base_list:
+			idxcomp.append([c.get_n(), c.get_base() - c.get_n()])
+		return idxcomp
+		
 	def all_zero(self):
 		for c in self.base_list:
 			if(c.get_n() != 0):
@@ -83,7 +91,9 @@ def main(args):
 	
 	while(True):
 		bnc.inc_counters()
-		print(bnc.get_indices())
+		print("idx: ", bnc.get_indices())
+		print("[idx, comp]: ", end="")
+		print(bnc.get_idx_complement())
 		if (bnc.all_zero() == True):
 			break
 						
