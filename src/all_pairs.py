@@ -73,19 +73,24 @@ def a_42(n):
 		if (bnc.all_zero() == True):
 			break
 	return count, equal_parity_pairs
+	
+def resolve_divisor_pairs(a,l):
+	# q is int(a) and l is [u,v]
+	# From:
+	# 	c = (u+v)/2, b = (v-u)/2, a = q
+	# establish the result a^2 + b^2 = c^2
 
 	
 def main(args):
 	# ~ product,primes = max_distinct_prime_product(1000000000)
 	# ~ print(product, primes)
 	
-	for q in range(21,200):
-		print("\nq:",q)
-		c,l = a_42(q)
-		print(c,l)
+	for a in range(3,20):
+		print("\na:",a)
+		c,llist = a_42(a)
+		print(c,ll)
+		resolve_divisor_pairs(a,llist)
 		
-	#pairs_225()
-	#pairs_196()
 	return 0
 
 
