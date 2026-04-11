@@ -50,46 +50,31 @@ def a_42(n):
 	let a = 42 then a^2 = 1764
 	a = 2*3*7  then 1764 = 2^2 * 3*2 * 7^2
 	exponent range is 0 <= e < 3
-
-	# Assume idx is list of current exponents. (dynamic)
-	# Assume blist is list of current bases. (static)
-	# for working_index in range(len(idx)):
-	#	calc divisor
-	#	calc dividend
 	"""
+	
 	factors = list(factorint(n).items())	# [ (base:exponent),...]
 	# square the exponents using a list comprehension
 	# use a list comprehension to get a list of doubled exponents
 	# prepare the base n counter for each prime
-	bnc = bncnt.BaseNcounters([x[1]*2 for x in factors])
+	bnc = bncnt.BaseNcounters([2*x[1] for x in factors])
 	# list the primes
-	plst = [x[0] for x in factors] #[p0,p1,p2...]
-	bases = bnc.get_base_list()
+	primes = [x[0] for x in factors]
 	count = 0
-	pivot = False
 	while(True):
-		idx = bnc.get_indices()	# current exponents
-		# plist has the corresponding primes
-		divisor = [x**y for x in plst for y in idx]
-		divisor = math.prod(divisor)
-		#dividend = 2**(2-e2) * 3**(2-e3) * 7**(2-e7)
-		idxcomp = bnc.get_idx_complement()
-		dividend = [x**(y[1]) for x in plst for y in idxcomp]
-		dividend = math.prod(dividend)
-					# ~ if(divisor%2 != dividend%2):
-						# ~ print("\t",end="")
-					# ~ else:
-						# ~ count += 1
-		print(divisor,dividend)
-					# ~ print(factorint(divisor), end = " ")
-					# ~ print(factorint(dividend))
-		# Breakout logic here
-		count += 1
-		if(divisor==dividend):
-			pivot = True
-			count -= 1
-			break
+		print("[idx, comp]: ", end="")
+		foo = bnc.get_idx_complement()
+		print(foo)
+		divisor = 1
+		dividend = 1
+		for i in range(len(primes)):
+			divisor  *= primes[i]**foo[i][0]
+			dividend *= primes[i]**foo[i][1]
+		print(divisor,"/",dividend)		
 		bnc.inc_counters()
+		if (bnc.all_zero() == True):
+			break
+		else:
+			count += 1
 	return count
 
 	
