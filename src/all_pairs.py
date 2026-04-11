@@ -46,12 +46,7 @@ def pairs_196():
 	return 0
 	
 def a_42(n):
-	"""
-	let a = 42 then a^2 = 1764
-	a = 2*3*7  then 1764 = 2^2 * 3*2 * 7^2
-	exponent range is 0 <= e < 3
-	"""
-	
+
 	factors = list(factorint(n).items())	# [ (base:exponent),...]
 	# square the exponents using a list comprehension
 	# use a list comprehension to get a list of doubled exponents
@@ -59,29 +54,36 @@ def a_42(n):
 	bnc = bncnt.BaseNcounters([2*x[1] for x in factors])
 	# list the primes
 	primes = [x[0] for x in factors]
+	equal_parity_pairs = list()
 	count = 0
 	while(True):
-		print("[idx, comp]: ", end="")
+		#print("[idx, comp]: ", end="")
 		foo = bnc.get_idx_complement()
-		print(foo)
+		#print(foo)
 		divisor = 1
 		dividend = 1
 		for i in range(len(primes)):
 			divisor  *= primes[i]**foo[i][0]
 			dividend *= primes[i]**foo[i][1]
-		print(divisor,"/",dividend)		
+		if((divisor%2 == dividend%2)and(divisor != dividend)):
+			#print(divisor,"/",dividend)
+			count += 1
+			equal_parity_pairs.append([divisor,dividend])	
 		bnc.inc_counters()
 		if (bnc.all_zero() == True):
 			break
-		else:
-			count += 1
-	return count
+	return count, equal_parity_pairs
 
 	
 def main(args):
 	# ~ product,primes = max_distinct_prime_product(1000000000)
 	# ~ print(product, primes)
-	print(a_42(42),"useable equal-parity pairs")
+	
+	for q in range(21,200):
+		print("\nq:",q)
+		c,l = a_42(q)
+		print(c,l)
+		
 	#pairs_225()
 	#pairs_196()
 	return 0

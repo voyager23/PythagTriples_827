@@ -55,7 +55,7 @@ class BaseNcounters:
 					break
 				else:	# Increment failed
 					continue
-		return self.base_list
+		return 0
 	
 	def get_base_list(self):
 		return self.base_list
