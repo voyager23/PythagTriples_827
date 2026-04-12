@@ -46,27 +46,28 @@ def pairs_196():
 	return 0
 	
 def a_42(n):
-
 	factors = list(factorint(n).items())	# [ (base:exponent),...]
-	# square the exponents using a list comprehension
-	# use a list comprehension to get a list of doubled exponents
 	# prepare the base n counter for each prime
-	bnc = bncnt.BaseNcounters([2*x[1] for x in factors])
+	# double the exponents using a list comprehension
+	bnc = bncnt.BaseNcounters( [ 2*x[1] for x in factors] )
 	# list the primes
 	primes = [x[0] for x in factors]
 	equal_parity_pairs = list()
 	count = 0
 	while(True):
-		#print("[idx, comp]: ", end="")
+		print("[idx, comp]: ", end="")
 		foo = bnc.get_idx_complement()
-		#print(foo)
+		print(foo)
 		divisor = 1
 		dividend = 1
 		for i in range(len(primes)):
 			divisor  *= primes[i]**foo[i][0]
 			dividend *= primes[i]**foo[i][1]
-		if((divisor%2 == dividend%2)and(divisor != dividend)):
-			#print(divisor,"/",dividend)
+			
+		print("Checking ", divisor, dividend)
+		#if((divisor%2 == dividend%2)and(divisor != dividend)):
+		if((divisor%2 == dividend%2)and(True)):
+			print(divisor,"/",dividend)
 			count += 1
 			equal_parity_pairs.append([divisor,dividend])	
 		bnc.inc_counters()
@@ -75,20 +76,28 @@ def a_42(n):
 	return count, equal_parity_pairs
 	
 def resolve_divisor_pairs(a,l):
-	# q is int(a) and l is [u,v]
+	# a is the query (int) and l is [u,v]
 	# From:
 	# 	c = (u+v)/2, b = (v-u)/2, a = q
 	# establish the result a^2 + b^2 = c^2
+	for p in l:
+		c = math.fsum(p) // 2
+		p[1] *= -1
+		b = math.fsum(p)
+		print(f"a:{a} b:{b} c:{c}")
+	
+	return 0
 
 	
 def main(args):
 	# ~ product,primes = max_distinct_prime_product(1000000000)
 	# ~ print(product, primes)
 	
-	for a in range(3,20):
+	for a in range(15,16):
 		print("\na:",a)
 		c,llist = a_42(a)
-		print(c,ll)
+		print(c,llist)
+		
 		resolve_divisor_pairs(a,llist)
 		
 	return 0

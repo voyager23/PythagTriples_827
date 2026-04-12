@@ -84,7 +84,7 @@ class BaseNcounters:
 # -----End Class BaseNcounters-----
 		
 def main(args):
-	bnc = BaseNcounters([2,3,5])
+	bnc = BaseNcounters([3,3])
 	for c in bnc.get_base_list():
 		print(f"{c.get_n()}/{c.get_base()}",end=" ")
 	print()
