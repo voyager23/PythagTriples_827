@@ -82,21 +82,21 @@ def main(args):
 		for q in even:
 			a = factorint(q[0])
 			b = factorint(q[1])
-			print(f"{q} {a}\t{b}")
+			print(f"{q}\t{a}\t{b}")
 		print()
 		
 		print("Odd Parity")
 		for q in odd:
 			a = factorint(q[0])
 			b = factorint(q[1])
-			print(f"{q} {a}\t{b}")
+			print(f"{q}\t{a}\t{b}")
 		print()
 		
 		print("Mixed Parity")
 		for q in mixed:
 			a = factorint(q[0])
 			b = factorint(q[1])
-			print(f"{q} {a}\t{b}")
+			print(f"{q}\t{a}\t{b}")
 		print()
 		print("-----------------------------------")
 		print(f"count_divisor_pairs({query}) = {count_divisor_pairs(query)}")

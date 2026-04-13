@@ -84,18 +84,27 @@ class BaseNcounters:
 # -----End Class BaseNcounters-----
 		
 def main(args):
-	bnc = BaseNcounters([3,3])
+	bnc = BaseNcounters([2,6,2])
 	for c in bnc.get_base_list():
 		print(f"{c.get_n()}/{c.get_base()}",end=" ")
 	print()
 	
+	# ~ while(True):
+		# ~ bnc.inc_counters()
+		# ~ print("idx: ", bnc.get_indices())
+		# ~ print("[idx, comp]: ", end="")
+		# ~ print(bnc.get_idx_complement())
+		# ~ if (bnc.all_zero() == True):
+			# ~ break
+			
 	while(True):
+		idxcomp = bnc.get_idx_complement()	# list of 2-list
+		print(idxcomp, end=" ")
+		product = 2**idxcomp[0][0] * 3**idxcomp[1][0] * 5**idxcomp[2][0] 		 
+		print(product)
 		bnc.inc_counters()
-		print("idx: ", bnc.get_indices())
-		print("[idx, comp]: ", end="")
-		print(bnc.get_idx_complement())
-		if (bnc.all_zero() == True):
-			break
+		if(bnc.all_zero()):
+			break	
 						
 	return 0
 
