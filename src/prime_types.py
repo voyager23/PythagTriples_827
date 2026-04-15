@@ -39,16 +39,24 @@ def func_legs(q):
 		else:
 			fint[p] -= 1
 		product *= fint[p]
-	print(q, " -> ", fint)
-	legs = (product - 1) / 2
+	print(q*q, " -> ", fint)
+	legs = (product - 1) // 2
 	return legs
-
+	
+def func_hypots(q):
+	fint = factorint(q)	# Dictionary of prime:exponent pairs
+	print(q*Q, " -> ", fint)
+	# Using BaseNcount and prime/exponent data, cycle thro' all the divisors
+	# and count 4K+1 and 4k+3 types to find divisors
+	# Divisor pairs are related to a^2 and b^2 such that a divisor pair (squared)
+	# may equal q^2
+	
 	
 
 def main(args):
-	for leg in range(3,101):
-		pairs = func_legs(leg)
-		print("Legs: ",pairs,"\n")
+
+	pairs = func_legs(75)
+	print("Legs: ",pairs,"\n")
 
 	
 	return 0
