@@ -17,14 +17,23 @@ def sum_two_squares_fast(n):
             x += 1
         else:
             y -= 1
-
     return pairs
 
 def main(args):
-    for q in range(101):
-        pairs = sum_two_squares_fast(q*q)
-        if((len(pairs)>1)and(True)):
-            print(q,pairs)
+	while(True):
+		q = input("Input query integer: ")
+		if(q == ""):
+			break
+		q = int(q)
+		pairs = sum_two_squares_fast(q)
+		#print any useful pairs
+		print(q,end=" ")
+		for p in pairs:
+			if(p[0] == 0):
+				continue
+			else:
+				print(p,end=" ")
+		print()
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:]))
