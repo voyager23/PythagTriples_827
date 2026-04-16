@@ -30,7 +30,7 @@ def main(args):
 		print(q,end=" ")
 		for p in pairs:
 			if(p[0] == 0):
-				continue
+				print(p,end=" ")
 			else:
 				print(p,end=" ")
 		print()
