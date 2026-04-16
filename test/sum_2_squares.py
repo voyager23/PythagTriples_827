@@ -1,6 +1,6 @@
 
 import sys
-import math+
+import math
 
 def sum_two_squares_fast(n):
     pairs = []
@@ -19,3 +19,12 @@ def sum_two_squares_fast(n):
             y -= 1
 
     return pairs
+
+def main(args):
+    for q in range(101):
+        pairs = sum_two_squares_fast(q*q)
+        if((len(pairs)>1)and(True)):
+            print(q,pairs)
+
+if __name__ == '__main__':
+    sys.exit(main(sys.argv[1:]))
