@@ -92,8 +92,8 @@ def resolve_divisor_pairs(a,l):
 def main(args):
 	# ~ product,primes = max_distinct_prime_product(1000000000)
 	# ~ print(product, primes)
-	
-	for a in range(15,16):
+	x, y = map(int, input("Enter query range as two space separated integers: ").split())
+	for a in range(x,y):
 		print("\na:",a)
 		c,llist = a_42(a)
 		print(c,llist)
