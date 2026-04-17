@@ -72,7 +72,7 @@ class BaseNcounters:
 		# and complement for each counter
 		idxcomp = list()
 		for c in self.base_list:
-			idxcomp.append([c.get_n(), c.get_base() - c.get_n()])
+			idxcomp.append([c.get_n(), c.get_base() - c.get_n() - 1])
 		return idxcomp
 		
 	def all_zero(self):
