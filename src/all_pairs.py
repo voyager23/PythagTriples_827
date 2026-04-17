@@ -46,27 +46,26 @@ def pairs_196():
 	return 0
 	
 def a_42(n):
+		
 	factors = list(factorint(n).items())	# [ (base:exponent),...]
 	# prepare the base n counter for each prime
 	# double the exponents using a list comprehension
-	bnc = bncnt.BaseNcounters( [ 2*x[1] for x in factors] )
+	bnc = bncnt.BaseNcounters( [ ((2*x[1])+1) for x in factors] )
 	# list the primes
 	primes = [x[0] for x in factors]
 	equal_parity_pairs = list()
 	count = 0
 	while(True):
 		print("[idx, comp]: ", end="")
-		foo = bnc.get_idx_complement()
-		print(foo)
+		idxcomp = bnc.get_idx_complement()
+		print(idxcomp)
 		divisor = 1
 		dividend = 1
 		for i in range(len(primes)):
-			divisor  *= primes[i]**foo[i][0]
-			dividend *= primes[i]**foo[i][1]
-			
-		print("Checking ", divisor, dividend)
-		#if((divisor%2 == dividend%2)and(divisor != dividend)):
-		if((divisor%2 == dividend%2)and(True)):
+			divisor  *= primes[i]**idxcomp[i][0]
+			dividend *= primes[i]**idxcomp[i][1]			
+		print(f"divisor {divisor} dividend {dividend}")
+		if(divisor%2 == dividend%2):
 			print(divisor,"/",dividend)
 			count += 1
 			equal_parity_pairs.append([divisor,dividend])	
@@ -98,7 +97,7 @@ def main(args):
 		c,llist = a_42(a)
 		print(c,llist)
 		
-		resolve_divisor_pairs(a,llist)
+		#resolve_divisor_pairs(a,llist)
 		
 	return 0
 
